@@ -55,11 +55,13 @@
             </div>
             <!-- /.col-lg-12 -->
         </div>
+
         <div class="no-js">
+
             <div class="cd-schedule loading">
                 <div class="timeline">
                     <ul>
-                        <li><span>09:00</span><span></span></li>
+                        <li><span>09:00</span></li>
                         <li><span>09:30</span></li>
                         <li><span>10:00</span></li>
                         <li><span>10:30</span></li>
@@ -80,13 +82,49 @@
                         <li><span>18:00</span></li>
                     </ul>
                 </div> <!-- .timeline -->
+
                 <div class="events">
                     <ul th:each="b : ${boards}">
-                        <li class="events-group">
+                        <li class="events-group ulwrap">
                             <div class="top-info"><span th:text="${b.professor}">Monday</span></div>
-                            <ul>
-                                <li class="single-event" data-start="11:00" data-end="12:15" data-content="event-abs-circuit" data-event="event-1">
-                                <a href="#0">
+                            <ul th:if="${b.test=='01'}">
+                                <li class="single-event" data-start="09:30" data-end="10:45" data-content="event-abs-circuit" data-event="event-1">
+                                    <a href="#0">
+                                        <em class="event-name" th:text="${b.name}">Abs Circuit</em>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul th:if="${b.test=='03'}">
+                                <li class="single-event" data-start="11:00" data-end="12:15" data-content="event-abs-circuit" data-event="event-2">
+                                    <a href="#0">
+                                        <em class="event-name" th:text="${b.name}">Abs Circuit</em>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul th:if="${b.test=='07'}">
+                                <li class="single-event" data-start="13:00" data-end="14:15" data-content="event-abs-circuit" data-event="event-3">
+                                    <a href="#0">
+                                        <em class="event-name" th:text="${b.name}">Abs Circuit</em>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul th:if="${b.test=='09'}">
+                                <li class="single-event" data-start="14:30" data-end="15:45" data-content="event-abs-circuit" data-event="event-4">
+                                    <a href="#0">
+                                        <em class="event-name" th:text="${b.name}">Abs Circuit</em>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul th:if="${b.test=='11'}">
+                                <li class="single-event" data-start="16:00" data-end="17:15" data-content="event-abs-circuit" data-event="event-1">
+                                    <a href="#0">
+                                        <em class="event-name" th:text="${b.name}">Abs Circuit</em>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul th:if="${b.test=='13'}">
+                                <li class="single-event" data-start="17:30" data-end="18:45" data-content="event-abs-circuit" data-event="event-2">
+                                    <a href="#0">
                                         <em class="event-name" th:text="${b.name}">Abs Circuit</em>
                                     </a>
                                 </li>
@@ -94,59 +132,43 @@
                         </li>
                     </ul>
                 </div>
-                <div class="event-modal">
-                    <header class="header">
-                        <div class="content">
-                            <span class="event-date"></span>
-                            <h3 class="event-name"></h3>
-                        </div>
-                        <div class="header-bg"></div>
-                    </header>
-                    <div class="body">
-                        <div class="event-info"></div>
-                        <div class="body-bg"></div>
-                    </div>
-
-                    <a href="#0" class="close">Close</a>
-                </div>
-
-                <div class="cover-layer"></div>
             </div>
+            <div class="cover-layer"></div>
         </div>
     </div>
     <div th:replace="footer ::copy"></div>
     <!-- /#page-wrapper -->
 
-<!-- /#wrapper -->
+    <!-- /#wrapper -->
 
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
+    <!-- jQuery -->
+    <script src="/js/jquery.min.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
 
-<!-- Metis Menu Plugin JavaScript -->
-<script src="/js/metisMenu.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/js/metisMenu.min.js"></script>
 
 
-<script src="/js/modernizr.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-<!--    <script>
-        if( !window.jQuery ) document.write('<script src="/js/jquery-3.0.0.min.js"></script>');
-    </script>-->
-<script src="js/main.js"></script> <!-- Resource jQuery -->
+    <script src="/js/modernizr.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <!--    <script>
+            if( !window.jQuery ) document.write('<script src="/js/jquery-3.0.0.min.js"></script>');
+        </script>-->
+    <script src="js/main.js"></script> <!-- Resource jQuery -->
 
-<!-- Custom Theme JavaScript -->
-<script src="/js/sb-admin-2.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="/js/sb-admin-2.js"></script>
 
-<!-- Page-Level Demo Scripts - Tables - Use for reference -->
-<script>
-    $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-            responsive: true
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+        $(document).ready(function() {
+            $('#dataTables-example').DataTable({
+                responsive: true
+            });
         });
-    });
-</script>
+    </script>
 </div>
 </body>
 </html>

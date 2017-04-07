@@ -55,16 +55,23 @@ public class WebController
         List<ClassDo> boards = timeTableMongoRepository.findAll();
         final String[] week = { "일", "월", "화", "수", "목", "금", "토" };
         Calendar cal = Calendar.getInstance();
-        int num = cal.get(Calendar.DAY_OF_WEEK)-1;
+        int num = cal.get(Calendar.DAY_OF_WEEK)-3;
         String today = week[num];
         System.out.println("test"+boards.get(0).getName());
         System.out.println(today);
-        for (int i=0;i<boards.size();i++) {
-            if (!boards.get(i).getRoom().contains(today)) {
+
+        for (int i=0;i<boards.size();) { //i<boards.size()
+            int j = boards.get(i).getRoom().indexOf(today);
+            if(j != -1) {
+                boards.get(i).setTest(boards.get(i).getRoom().charAt(j+1));
+                boards.get(i).setTest(boards.get(i).getRoom().charAt(j+2));
+                i++;
+                model.addAttribute("boards", boards);
+            }
+            else {
                 boards.remove(i);
             }
         }
-        model.addAttribute("boards",boards);
         return "tables";
     }
 
