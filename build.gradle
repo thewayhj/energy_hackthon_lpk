@@ -26,6 +26,13 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter')
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+
+	compile group: 'org.codehaus.jackson', name: 'jackson-core-asl', version: '1.9.13'
+
+	compile("org.springframework.boot:spring-boot-starter-websocket")
+	compile("org.webjars:sockjs-client:1.0.2")
+	compile("org.webjars:stomp-websocket:2.3.3")
+
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 	testCompile('org.springframework.boot:spring-boot-starter-test')

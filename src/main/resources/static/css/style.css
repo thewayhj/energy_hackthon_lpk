@@ -604,3 +604,14 @@ Main Components
   opacity: 1;
   visibility: visible;
 }
+.wrap{
+  width: 1000px;
+  overflow-x: scroll;
+  white-space:nowrap;
+}
+.ulwrap{
+  white-space:nowrap;
+}
+.liwrap{
+  display:inline;
+}

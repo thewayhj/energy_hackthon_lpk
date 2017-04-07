@@ -3,7 +3,12 @@ package com.lpk.energy.controller;
 import com.lpk.energy.ClassDo;
 import com.lpk.energy.TimeTableLoad;
 import com.lpk.energy.TimeTableMongoRepository;
+<<<<<<< HEAD
 import com.lpk.energy.weather.weatherDo;
+=======
+import com.lpk.energy.room.RoomDo;
+import com.lpk.energy.room.RoomMongoRepository;
+>>>>>>> aa993b5c0c555aae98f546070de3f6fcd2369dd9
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,10 +41,10 @@ public class WebController
     @Autowired
     TimeTableMongoRepository timeTableMongoRepository;
 
-    @RequestMapping(value="/")
-    public String main(){
-        return "main";
-    }
+    @Autowired
+    RoomMongoRepository roomMongoRepository;
+
+
     @RequestMapping(value="/main")
     public String mainframe(Model model)
     {
@@ -93,11 +98,11 @@ public class WebController
         return "flot";
     }
 
-
     @RequestMapping(value="/test1234")
     public String test(){
         TimeTableLoad timeTableLoad = new TimeTableLoad();
         timeTableMongoRepository.save(timeTableLoad.send());
+
         return "main";
     }
 
@@ -108,74 +113,52 @@ public class WebController
     @RequestMapping(value="/tables", method = RequestMethod.GET)
     public String tables(Model model, @RequestParam(required = false) String room){
         List<ClassDo> boards = timeTableMongoRepository.findAll();
+        List<RoomDo> rooms = roomMongoRepository.findByBuilding("18");
+
+
+
         final String[] week = { "일", "월", "화", "수", "목", "금", "토" };
         Calendar cal = Calendar.getInstance();
         int num = cal.get(Calendar.DAY_OF_WEEK)-3;
         String today = week[num];
         System.out.println("test"+boards.get(0).getName());
         System.out.println(today);
-        Collections.sort(boards, new Comparator<ClassDo>() {
-            @Override
-            public int compare(ClassDo o1, ClassDo o2) {
-                return o1.getRoom().compareTo(o2.getRoom());
+
+
+        for (int i=0;i<boards.size();) { //i<boards.size()
+            int j = boards.get(i).getRoom().indexOf(today);
+            if(j != -1) {
+                boards.get(i).setTest(boards.get(i).getRoom().charAt(j+1));
+                boards.get(i).setTest(boards.get(i).getRoom().charAt(j+2));
+                i++;
+
+                for(RoomDo roomDo: rooms) {
+                    if(roomDo.getRoom().equals(boards.get(i-1).getProfessor())) {
+                        roomDo.setTime(boards.get(i-1));
+                    }
+                }
             }
+            else {
 
-        });
-
-        for (int i=0;i<boards.size();i++) {
-            if (!boards.get(i).getRoom().contains(today) || boards.get(i).getProfessor().equals("()?")) {
                 boards.remove(i);
 
             }
-            else {
-                StringTokenizer str = new StringTokenizer(boards.get(i).getRoom(), today);
 
-                int count = str.countTokens();
-                System.out.println("파싱할 문자열의 수는 총" + count + " 개");
 
-                while (str.hasMoreTokens()) { //아직 파싱할 토큰이 더 있는지 여부를 확인한다 System.out.println(str.nextToken()); //파싱해서 구한 다음토큰을 반환한다. }
-                    switch (str.nextToken())
-                    {
-                        case "03":
-                            boards.get(i).setStarttime("10:00");
-                            break;
-                        case "04":
-                            boards.get(i).setEndtime("11:30");
-                            break;
-                        case "07":
-                            boards.get(i).setStarttime("13:00");
-                            break;
-                        case "08":
-                            boards.get(i).setEndtime("14:45");
-                            break;
-                        case "09":
-                            boards.get(i).setStarttime("15:00");
-                            break;
-                        case "10":
-                            boards.get(i).setEndtime("16:45");
-                            break;
-                        case "11":
-                            boards.get(i).setStarttime("17:00");
-                            break;
-                        case "12":
-                            boards.get(i).setEndtime("18:45");
-                            break;
-                        case "13":
-                            boards.get(i).setStarttime("19:00");
-                            break;
-                        case "14":
-                            boards.get(i).setEndtime("20:45");
-                            break;
-                    }
-
-                }
-            }
 
 
         }
 
 
-        model.addAttribute("boards",boards);
+//        for (RoomDo roomDo:rooms) {
+//
+//            System.out.println(roomDo.get);
+//
+//        }
+
+        model.addAttribute("boards", boards);
+        model.addAttribute("rooms", rooms);
+
         return "tables";
     }
 

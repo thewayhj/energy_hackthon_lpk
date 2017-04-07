@@ -32,8 +32,12 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
+    <script src="/static/js/sockjs-0.3.min.js"></script>
+    <script src="/static/js/stomp.js"></script>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+
     <![endif]-->
     <link rel="stylesheet" href="/css/reset.css"/> <!-- CSS reset -->
     <link rel="stylesheet" href="/css/style.css"/> <!-- Resource style -->
@@ -59,7 +63,7 @@
             <div class="cd-schedule loading">
                 <div class="timeline">
                     <ul>
-                        <li><span>09:00</span><span></span></li>
+                        <li><span>09:00</span></li>
                         <li><span>09:30</span></li>
                         <li><span>10:00</span></li>
                         <li><span>10:30</span></li>
@@ -78,75 +82,99 @@
                         <li><span>17:00</span></li>
                         <li><span>17:30</span></li>
                         <li><span>18:00</span></li>
+                        <li><span>18:30</span></li>
+                        <li><span>19:00</span></li>
+                        <li><span>19:30</span></li>
+                        <li><span>20:00</span></li>
+                        <li><span>20:30</span></li>
+                        <li><span>21:00</span></li>
+                        <li><span>21:30</span></li>
+                        <li><span>22:00</span></li>
+                        <li><span>22:30</span></li>
+                        <li><span>23:0</span></li>
+                        <li><span>23:30</span></li>
+                        <li><span>24:00</span></li>
                     </ul>
                 </div> <!-- .timeline -->
+
                 <div class="events">
-                    <ul th:each="b : ${boards}">
-                        <li class="events-group">
-                            <div class="top-info"><span th:text="${b.professor}"></span></div>
-                            <ul>
-                                <li class="single-event" data-start="${b.starttime}" data-end="${b.endtime}" data-content="event-abs-circuit" data-event="event-1">
-                                <a href="#0">
-                                        <em class="event-name" th:text="${b.name}">Abs Circuit</em>
+
+                    <ul th:each="room : ${rooms}">
+                        <li class="events-group ulwrap" >
+                            <div class="top-info"><span th:text="${room.room}"></span></div>
+
+                            <ul th:each="time: ${room.times}">
+                                <li th:if="${time.test=='01'}" class="single-event" data-start="09:30" data-end="10:45" data-content="event-abs-circuit" data-event="event-1">
+                                    <a href="#0">
+                                        <em class="event-name" th:text="${time.name}">Abs Circuit</em>
+                                    </a>
+                                </li>
+                                <li th:if="${time.test=='03'}" class="single-event" data-start="11:00" data-end="12:15" data-content="event-abs-circuit" data-event="event-2">
+                                    <a href="#0">
+                                        <em class="event-name" th:text="${time.name}">Abs Circuit</em>
+                                    </a>
+                                </li>
+                                <li th:if="${time.test=='07'}" class="single-event" data-start="13:00" data-end="14:15" data-content="event-abs-circuit" data-event="event-3">
+                                    <a href="#0">
+                                        <em class="event-name" th:text="${time.name}">Abs Circuit</em>
+                                    </a>
+                                </li>
+                                <li th:if="${time.test=='09'}" class="single-event" data-start="14:30" data-end="15:45" data-content="event-abs-circuit" data-event="event-4">
+                                    <a href="#0">
+                                        <em class="event-name" th:text="${time.name}">Abs Circuit</em>
+                                    </a>
+                                </li>
+                                <li th:if="${time.test=='11'}" class="single-event" data-start="16:00" data-end="17:15" data-content="event-abs-circuit" data-event="event-1">
+                                    <a href="#0">
+                                        <em class="event-name" th:text="${time.name}">Abs Circuit</em>
+                                    </a>
+                                </li>
+                                <li th:if="${time.test=='13'}" class="single-event" data-start="17:30" data-end="18:45" data-content="event-abs-circuit" data-event="event-2">
+                                    <a href="#0">
+                                        <em class="event-name" th:text="${time.name}">Abs Circuit</em>
+
                                     </a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </div>
-                <div class="event-modal">
-                    <header class="header">
-                        <div class="content">
-                            <span class="event-date"></span>
-                            <h3 class="event-name"></h3>
-                        </div>
-                        <div class="header-bg"></div>
-                    </header>
-                    <div class="body">
-                        <div class="event-info"></div>
-                        <div class="body-bg"></div>
-                    </div>
-
-                    <a href="#0" class="close">Close</a>
-                </div>
-
-                <div class="cover-layer"></div>
             </div>
+            <div class="cover-layer"></div>
         </div>
     </div>
-    <div th:replace="footer ::copy"></div>
     <!-- /#page-wrapper -->
 
-<!-- /#wrapper -->
+    <!-- /#wrapper -->
 
-<!-- jQuery -->
-<script src="/js/jquery.min.js"></script>
+    <!-- jQuery -->
+    <script src="/js/jquery.min.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
 
-<!-- Metis Menu Plugin JavaScript -->
-<script src="/js/metisMenu.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/js/metisMenu.min.js"></script>
 
 
-<script src="/js/modernizr.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-<!--    <script>
-        if( !window.jQuery ) document.write('<script src="/js/jquery-3.0.0.min.js"></script>');
-    </script>-->
-<script src="js/main.js"></script> <!-- Resource jQuery -->
+    <script src="/js/modernizr.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <!--    <script>
+            if( !window.jQuery ) document.write('<script src="/js/jquery-3.0.0.min.js"></script>');
+        </script>-->
+    <script src="js/main.js"></script> <!-- Resource jQuery -->
 
-<!-- Custom Theme JavaScript -->
-<script src="/js/sb-admin-2.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="/js/sb-admin-2.js"></script>
 
-<!-- Page-Level Demo Scripts - Tables - Use for reference -->
-<script>
-    $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-            responsive: true
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+        $(document).ready(function() {
+            $('#dataTables-example').DataTable({
+                responsive: true
+            });
         });
-    });
-</script>
+    </script>
 </div>
 </body>
 </html>
