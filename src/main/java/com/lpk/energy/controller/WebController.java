@@ -30,15 +30,14 @@ public class WebController
         return "flot";
     }
 
-    @RequestMapping(value="/test")
-    public String test(){
+    @RequestMapping(value="/test1234")
+    public void test(){
 
         TimeTableLoad timeTableLoad = new TimeTableLoad();
 
 
         timeTableMongoRepository.save(timeTableLoad.send());
 
-        return "index";
     }
 
     @RequestMapping(value="/morris")

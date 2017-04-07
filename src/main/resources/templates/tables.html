@@ -32,8 +32,12 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
+    <script src="/static/js/sockjs-0.3.min.js"></script>
+    <script src="/static/js/stomp.js"></script>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+
     <![endif]-->
     <link href="/css/calendar.css" rel="stylesheet"/>
     <link href="/js/calendar.js" rel="stylesheet"/>
@@ -56,12 +60,6 @@
         </div>
         <div class="jqx-tabs-content jqx-tabs-content-jqxtabs jqx-widget-content jqx-widget-content-jqxtabs jqx-rc-b jqx-rc-b-jqxtabs calendarforms">
             <div id="tabs-1" role="tabpanel" class="jqx-tabs-content-element jqx-tabs-content-element-jqxtabs jqx-rc-b jqx-rc-b-jqxtabs calendarform">
-                <div>
-                    <div id="innerdemoContainer">
-                        <iframe frameborder="0" src="http://www.jqwidgets.com/jquery-widgets-demo/demos/jqxscheduler/defaultfunctionality.htm?light" id="jqxInnerdemoContainer" class="calendar">
-                        </iframe>
-                    </div>
-                </div>
             </div>
         </div>
         <div th:replace="footer ::copy"></div>

@@ -1114,6 +1114,9 @@ $(function() {
 
     var data = [];
 
+
+
+
     function getRandomData() {
 
         if (data.length) {
@@ -1139,7 +1142,7 @@ $(function() {
     //
 
     series = [{
-        data: getRandomData(),
+        data: [10, 10],
         lines: {
             fill: true
         }
