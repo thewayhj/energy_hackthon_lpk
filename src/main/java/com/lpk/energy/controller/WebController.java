@@ -14,4 +14,8 @@ public class WebController
         return "index";
     }
 
+    @RequestMapping(value="/widgettest")
+    public String widgettest(){
+        return "widgettest";
+    }
 }
