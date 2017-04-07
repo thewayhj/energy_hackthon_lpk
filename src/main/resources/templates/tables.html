@@ -60,7 +60,6 @@
             <!-- /.col-lg-12 -->
         </div>
         <div class="no-js">
-
             <div class="cd-schedule loading">
                 <div class="timeline">
                     <ul>
@@ -83,52 +82,55 @@
                         <li><span>17:00</span></li>
                         <li><span>17:30</span></li>
                         <li><span>18:00</span></li>
+                        <li><span>18:30</span></li>
+                        <li><span>19:00</span></li>
+                        <li><span>19:30</span></li>
+                        <li><span>20:00</span></li>
+                        <li><span>20:30</span></li>
+                        <li><span>21:00</span></li>
+                        <li><span>21:30</span></li>
+                        <li><span>22:00</span></li>
+                        <li><span>22:30</span></li>
+                        <li><span>23:0</span></li>
+                        <li><span>23:30</span></li>
+                        <li><span>24:00</span></li>
                     </ul>
                 </div> <!-- .timeline -->
 
                 <div class="events">
-                    <ul th:each="b : ${boards}">
-                        <li class="events-group ulwrap">
-                            <div class="top-info"><span th:text="${b.professor}">Monday</span></div>
-                            <ul th:if="${b.test=='01'}">
-                                <li class="single-event" data-start="09:30" data-end="10:45" data-content="event-abs-circuit" data-event="event-1">
+                    <ul th:each="room : ${rooms}">
+                        <li class="events-group ulwrap" >
+                            <div class="top-info"><span th:text="${room.room}"></span></div>
+
+                            <ul th:each="time: ${room.times}">
+                                <li th:if="${time.test=='01'}" class="single-event" data-start="09:30" data-end="10:45" data-content="event-abs-circuit" data-event="event-1">
                                     <a href="#0">
-                                        <em class="event-name" th:text="${b.name}">Abs Circuit</em>
+                                        <em class="event-name" th:text="${time.name}">Abs Circuit</em>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul th:if="${b.test=='03'}">
-                                <li class="single-event" data-start="11:00" data-end="12:15" data-content="event-abs-circuit" data-event="event-2">
+                                <li th:if="${time.test=='03'}" class="single-event" data-start="11:00" data-end="12:15" data-content="event-abs-circuit" data-event="event-2">
                                     <a href="#0">
-                                        <em class="event-name" th:text="${b.name}">Abs Circuit</em>
+                                        <em class="event-name" th:text="${time.name}">Abs Circuit</em>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul th:if="${b.test=='07'}">
-                                <li class="single-event" data-start="13:00" data-end="14:15" data-content="event-abs-circuit" data-event="event-3">
+                                <li th:if="${time.test=='07'}" class="single-event" data-start="13:00" data-end="14:15" data-content="event-abs-circuit" data-event="event-3">
                                     <a href="#0">
-                                        <em class="event-name" th:text="${b.name}">Abs Circuit</em>
+                                        <em class="event-name" th:text="${time.name}">Abs Circuit</em>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul th:if="${b.test=='09'}">
-                                <li class="single-event" data-start="14:30" data-end="15:45" data-content="event-abs-circuit" data-event="event-4">
+                                <li th:if="${time.test=='09'}" class="single-event" data-start="14:30" data-end="15:45" data-content="event-abs-circuit" data-event="event-4">
                                     <a href="#0">
-                                        <em class="event-name" th:text="${b.name}">Abs Circuit</em>
+                                        <em class="event-name" th:text="${time.name}">Abs Circuit</em>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul th:if="${b.test=='11'}">
-                                <li class="single-event" data-start="16:00" data-end="17:15" data-content="event-abs-circuit" data-event="event-1">
+                                <li th:if="${time.test=='11'}" class="single-event" data-start="16:00" data-end="17:15" data-content="event-abs-circuit" data-event="event-1">
                                     <a href="#0">
-                                        <em class="event-name" th:text="${b.name}">Abs Circuit</em>
+                                        <em class="event-name" th:text="${time.name}">Abs Circuit</em>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul th:if="${b.test=='13'}">
-                                <li class="single-event" data-start="17:30" data-end="18:45" data-content="event-abs-circuit" data-event="event-2">
+                                <li th:if="${time.test=='13'}" class="single-event" data-start="17:30" data-end="18:45" data-content="event-abs-circuit" data-event="event-2">
                                     <a href="#0">
-                                        <em class="event-name" th:text="${b.name}">Abs Circuit</em>
+                                        <em class="event-name" th:text="${time.name}">Abs Circuit</em>
                                     </a>
                                 </li>
                             </ul>
@@ -139,7 +141,6 @@
             <div class="cover-layer"></div>
         </div>
     </div>
-    <div th:replace="footer ::copy"></div>
     <!-- /#page-wrapper -->
 
     <!-- /#wrapper -->

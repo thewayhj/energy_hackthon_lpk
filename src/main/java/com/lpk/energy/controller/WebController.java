@@ -3,6 +3,8 @@ package com.lpk.energy.controller;
 import com.lpk.energy.ClassDo;
 import com.lpk.energy.TimeTableLoad;
 import com.lpk.energy.TimeTableMongoRepository;
+import com.lpk.energy.room.RoomDo;
+import com.lpk.energy.room.RoomMongoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,9 @@ public class WebController
 
     @Autowired
     TimeTableMongoRepository timeTableMongoRepository;
+
+    @Autowired
+    RoomMongoRepository roomMongoRepository;
 
     @RequestMapping(value="/")
     public String main(){
@@ -53,6 +58,10 @@ public class WebController
     @RequestMapping(value="/tables", method = RequestMethod.GET)
     public String tables(Model model, @RequestParam(required = false) String room){
         List<ClassDo> boards = timeTableMongoRepository.findAll();
+        List<RoomDo> rooms = roomMongoRepository.findByBuilding("18");
+
+
+
         final String[] week = { "일", "월", "화", "수", "목", "금", "토" };
         Calendar cal = Calendar.getInstance();
         int num = cal.get(Calendar.DAY_OF_WEEK)-3;
@@ -66,12 +75,26 @@ public class WebController
                 boards.get(i).setTest(boards.get(i).getRoom().charAt(j+1));
                 boards.get(i).setTest(boards.get(i).getRoom().charAt(j+2));
                 i++;
-                model.addAttribute("boards", boards);
+
+                for(RoomDo roomDo: rooms) {
+                    if(roomDo.getRoom().equals(boards.get(i-1).getProfessor())) {
+                        roomDo.setTime(boards.get(i-1));
+                    }
+                }
             }
             else {
                 boards.remove(i);
             }
         }
+
+//        for (RoomDo roomDo:rooms) {
+//
+//            System.out.println(roomDo.get);
+//
+//        }
+
+        model.addAttribute("boards", boards);
+        model.addAttribute("rooms", rooms);
         return "tables";
     }
 
