@@ -11,7 +11,29 @@ public class WebController
 {
     @RequestMapping(value="/")
     public String main(){
-        return "index";
+        return "main";
+    }
+    @RequestMapping(value="/main")
+    public String mainframe(){
+        return "main";
     }
 
+    @RequestMapping(value="/flot")
+    public String flot(){
+        return "flot";
+    }
+
+    @RequestMapping(value="/morris")
+    public String morris(){
+        return "morris";
+    }
+    @RequestMapping(value="/tables")
+    public String tables(){
+        return "tables";
+    }
+
+    @RequestMapping(value="/calendar")
+    public String calendar(){
+        return "calendar";
+    }
 }
