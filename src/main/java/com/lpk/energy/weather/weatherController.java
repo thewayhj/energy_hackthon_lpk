@@ -29,47 +29,47 @@ public class weatherController {
         URL url =null;
         URLConnection conn=null;
         List<weatherDo> weatherList = new ArrayList();
-            try {
-                url =new URL("http://web.kma.go.kr/wid/queryDFSRSS.jsp?zone=1162069500");
-                conn=url.openConnection();
+        try {
+            url =new URL("http://web.kma.go.kr/wid/queryDFSRSS.jsp?zone=1162069500");
+            conn=url.openConnection();
 
-                DocumentBuilderFactory f= DocumentBuilderFactory.newInstance();
-                DocumentBuilder b = f.newDocumentBuilder();
-                Document doc = b.parse(conn.getInputStream());
+            DocumentBuilderFactory f= DocumentBuilderFactory.newInstance();
+            DocumentBuilder b = f.newDocumentBuilder();
+            Document doc = b.parse(conn.getInputStream());
 
-                doc.getDocumentElement().normalize();
+            doc.getDocumentElement().normalize();
 
-                NodeList data = doc.getElementsByTagName("data");
-                for(int i=0;i<data.getLength();i++) {
-                    weatherDo weatherdo = new weatherDo();
-                    Element e = (Element) data.item(i);
-                    if(e.getNodeType() !=Node.ELEMENT_NODE)
-                        continue;
+            NodeList data = doc.getElementsByTagName("data");
+            for(int i=0;i<data.getLength();i++) {
+                weatherDo weatherdo = new weatherDo();
+                Element e = (Element) data.item(i);
+                if(e.getNodeType() !=Node.ELEMENT_NODE)
+                    continue;
 
-                    String hour = e.getElementsByTagName("hour").item(0).getTextContent(); //트리구조이기떄문에 첫번째데이터 item(0)을 해줘야함. 의 데이터를 꺼내준다.
-                    String temp = e.getElementsByTagName("temp").item(0).getTextContent();
-                    String wfEn = e.getElementsByTagName("wfEn").item(0).getTextContent();
-                    System.out.println("index"+i);
-                    weatherdo.setHour(Integer.parseInt(hour));
-                    weatherdo.setTemp(Double.parseDouble(temp));
-                    weatherdo.setWfEn(wfEn);
+                String hour = e.getElementsByTagName("hour").item(0).getTextContent(); //트리구조이기떄문에 첫번째데이터 item(0)을 해줘야함. 의 데이터를 꺼내준다.
+                String temp = e.getElementsByTagName("temp").item(0).getTextContent();
+                String wfEn = e.getElementsByTagName("wfEn").item(0).getTextContent();
+                System.out.println("index"+i);
+                weatherdo.setHour(Integer.parseInt(hour));
+                weatherdo.setTemp(Double.parseDouble(temp));
+                weatherdo.setWfEn(wfEn);
 
-                    weatherList.add(weatherdo);
-                }
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }catch (IOException e) {
-                e.printStackTrace();
-            }catch (ParserConfigurationException e) {
-                e.printStackTrace();
-            }catch (SAXException e) {
-                e.printStackTrace();
+                weatherList.add(weatherdo);
             }
+
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }catch (SAXException e) {
+            e.printStackTrace();
+        }
 
 
         return weatherList.get(1).getTemp();
     }
-    }
+}
 
