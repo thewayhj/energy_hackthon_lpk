@@ -26,6 +26,7 @@ public class ClassDo {
     private String room;
     private String professor;
     private String student_count;
+    private StringBuffer test;
 
     public ClassDo(String classId, String name, String time, String room, String professor, String student_count) {
         this.classId = classId;
@@ -34,6 +35,7 @@ public class ClassDo {
         this.room = room;
         this.professor = professor;
         this.student_count = student_count;
+        this.test = new StringBuffer("");
     }
 
     public String getClassId() {
@@ -82,5 +84,13 @@ public class ClassDo {
 
     public void setStudent_count(String student_count) {
         this.student_count = student_count;
+    }
+
+    public void setTest(char test) {
+        this.test.append(test);
+    }
+
+    public String getTest() {
+        return test.toString();
     }
 }
