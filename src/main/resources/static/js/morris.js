@@ -740,7 +740,7 @@ Licensed under the BSD-2-Clause License.
     Line.prototype.defaults = {
       lineWidth: 3,
       pointSize: 4,
-      lineColors: ['#0b62a4', '#7A92A3', '#4da74d', '#afd8f8', '#edc240', '#cb4b4b', '#9440ed'],
+      lineColors: ['#4da74d', '#7A92A3', '#4da74d', '#afd8f8', '#edc240', '#cb4b4b', '#9440ed'],
       pointStrokeWidths: [1],
       pointStrokeColors: ['#ffffff'],
       pointFillColors: [],
@@ -1294,7 +1294,7 @@ Licensed under the BSD-2-Clause License.
       areaOptions = $.extend({}, areaDefaults, options);
       this.cumulative = !areaOptions.behaveLikeLine;
       if (areaOptions.fillOpacity === 'auto') {
-        areaOptions.fillOpacity = areaOptions.behaveLikeLine ? .8 : 1;
+        areaOptions.fillOpacity = areaOptions.behaveLikeLine ? .8 : 3;
       }
       Area.__super__.constructor.call(this, areaOptions);
     }
