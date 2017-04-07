@@ -27,3 +27,6 @@ nbdist/
 
 
 .gradle/
+out/
+src/main/java/com/lpk/energy/repository/
+src/test/resources/

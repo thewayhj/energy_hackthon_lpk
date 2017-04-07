@@ -85,11 +85,3 @@ table.dataTable thead .sorting_asc_disabled:before,
 table.dataTable thead .sorting_desc_disabled:after {
   opacity: 0;
 }
-
-#lenghup {
-    
-}
-
-#lengh {
-    width: 100%;
-}
