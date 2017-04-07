@@ -3,12 +3,11 @@ package com.lpk.energy.controller;
 import com.lpk.energy.ClassDo;
 import com.lpk.energy.TimeTableLoad;
 import com.lpk.energy.TimeTableMongoRepository;
-<<<<<<< HEAD
-import com.lpk.energy.weather.weatherDo;
-=======
+
 import com.lpk.energy.room.RoomDo;
 import com.lpk.energy.room.RoomMongoRepository;
->>>>>>> aa993b5c0c555aae98f546070de3f6fcd2369dd9
+
+import com.lpk.energy.weather.weatherDo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,8 +42,10 @@ public class WebController
 
     @Autowired
     RoomMongoRepository roomMongoRepository;
-
-
+    @RequestMapping(value="/")
+    public String main(){
+        return "redirect:/main";
+    }
     @RequestMapping(value="/main")
     public String mainframe(Model model)
     {
