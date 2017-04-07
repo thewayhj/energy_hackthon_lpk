@@ -26,6 +26,24 @@ public class ClassDo {
     private String room;
     private String professor;
     private String student_count;
+    private String starttime;
+    private String endtime;
+
+    public String getStarttime() {
+        return starttime;
+    }
+
+    public void setStarttime(String starttime) {
+        this.starttime = starttime;
+    }
+
+    public String getEndtime() {
+        return endtime;
+    }
+
+    public void setEndtime(String endtime) {
+        this.endtime = endtime;
+    }
 
     public ClassDo(String classId, String name, String time, String room, String professor, String student_count) {
         this.classId = classId;

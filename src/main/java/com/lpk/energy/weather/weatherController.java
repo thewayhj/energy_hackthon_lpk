@@ -52,7 +52,7 @@ public class weatherController {
                 System.out.println("index"+i);
                 weatherdo.setHour(Integer.parseInt(hour));
                 weatherdo.setTemp(Double.parseDouble(temp));
-                weatherdo.setWfEn(wfEn);
+                weatherdo.setWfen(wfEn);
 
                 weatherList.add(weatherdo);
             }

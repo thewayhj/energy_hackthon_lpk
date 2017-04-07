@@ -83,9 +83,9 @@
                 <div class="events">
                     <ul th:each="b : ${boards}">
                         <li class="events-group">
-                            <div class="top-info"><span th:text="${b.professor}">Monday</span></div>
+                            <div class="top-info"><span th:text="${b.professor}"></span></div>
                             <ul>
-                                <li class="single-event" data-start="11:00" data-end="12:15" data-content="event-abs-circuit" data-event="event-1">
+                                <li class="single-event" data-start="${b.starttime}" data-end="${b.endtime}" data-content="event-abs-circuit" data-event="event-1">
                                 <a href="#0">
                                         <em class="event-name" th:text="${b.name}">Abs Circuit</em>
                                     </a>
