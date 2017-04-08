@@ -51,19 +51,18 @@
     <!-- Navigation -->
     <div th:replace="header :: copy"></div>
     <div th:replace="nav :: copy"></div>
-
+    <div style="float: right; margin-right: 6%; margin-top: 15px;" >
+        <select name="building" class="button" id="search" onchange='if(this.value != 0) { this.form.submit(); }'>
+            <option value="3동">3동</option>
+            <option value="5동" >5동</option>
+            <option value="6동" >6동</option>
+            <option value="25동" >25동</option>
+            <option value="27동" >27동</option>
+            <option value="129동" >129동</option>
+        </select>
+        <!-- /.col-lg-12 -->
+    </div>
     <div id="page-wrapper">
-        <div class="row">
-                <select name="city" class="button" id="search" onchange='if(this.value != 0) { this.form.submit(); }'>
-                    <option value="0"   >3동</option>
-                    <option value="서울" >5동</option>
-                    <option value="경기" >6동</option>
-                    <option value="제주" >25동</option>
-                    <option value="제주" >27동</option>
-                    <option value="제주" >129동</option>
-                </select>
-            <!-- /.col-lg-12 -->
-        </div>
         <div class="no-js">
             <div class="cd-schedule loading">
                 <div class="timeline">

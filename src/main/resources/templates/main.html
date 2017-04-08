@@ -63,26 +63,26 @@
 
                         </span>
                         </span>
-                    <p th:if="${firstPer.temp}>30">
+                 <!--   <p th:if="${firstPer.temp}&gt;30">
                         현재 서울특별시 관악구 신림동 날씨는 <span th:text="${firstPer.wfen}"/> 이며 온도는 <span th:text="${firstPer.temp}"/> 입니다.
                         날씨가 덥습니다. 냉방기를 가동합니다.
-                    </p>
-                    <p th:if="${firstPer.temp}>23 || ${firstPer.temp}<=30">
+                    </p>-->
+               <!--     <p th:if="${firstPer.temp}>23 || ${firstPer.temp}<=30">
                         현재 서울특별시 관악구 신림동 날씨는 <span th:text="${firstPer.wfen}"/> 이며 온도는 <span th:text="${firstPer.temp}"/> 입니다.
                         기온이 약간 덥습니다. 냉방기를 조금 가동합니다.
-                    </p>
-                    <p th:if="${firstPer.temp}>10 || ${firstPer.temp}<=23">
+                    </p>-->
+                    <p> <!-- th:if="${firstPer.temp}>10 || ${firstPer.temp}<=23"-->
                         현재 서울특별시 관악구 신림동 날씨는 <span th:text="${firstPer.wfen}"/> 이며 온도는 <span th:text="${firstPer.temp}"/> 입니다.
                         따뜻한 기온으로 냉방기와 온풍기를 가동을 할 필요가 없습니다.
                     </p>
-                    <p th:if="${firstPer.temp}>0 || ${firstPer.temp}<=10">
+                   <!-- <p th:if="${firstPer.temp}>0 || ${firstPer.temp}<=10">
                         현재 서울특별시 관악구 신림동 날씨는 <span th:text="${firstPer.wfen}"/> 이며 온도는 <span th:text="${firstPer.temp}"/> 입니다.
                         기온이 약간 쌀쌀합니다. 온풍기를 조금 가동합니다.
                     </p>
                     <p th:if="${firstPer.temp}<=0">
                         현재 서울특별시 관악구 신림동 날씨는 <span th:text="${firstPer.wfen}"/> 이며 온도는 <span th:text="${firstPer.temp}"/> 입니다.
                         현재 온도 0도 이하입니다. 온풍기를 가동합니다.
-                    </p>
+                    </p>-->
                 </div>
             </div>
             <!-- /.col-lg-12 -->
