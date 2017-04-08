@@ -3,15 +3,14 @@ package com.lpk.energy.controller;
 import com.lpk.energy.ClassDo;
 import com.lpk.energy.TimeTableLoad;
 import com.lpk.energy.TimeTableMongoRepository;
-
+import com.lpk.energy.enertalk.RealTimeUsageDo;
+import com.lpk.energy.enertalk.RealTimeUsageMongoRepository;
 import com.lpk.energy.room.RoomDo;
 import com.lpk.energy.room.RoomMongoRepository;
-
 import com.lpk.energy.weather.weatherDo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +27,13 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.*;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 
 /**
  * Created by HeeJoongKim on 2017-04-07.
@@ -39,6 +44,8 @@ public class WebController
 
     @Autowired
     TimeTableMongoRepository timeTableMongoRepository;
+    @Autowired
+    RealTimeUsageMongoRepository realTimeUsageMongoRepository;
 
     @Autowired
     RoomMongoRepository roomMongoRepository;
@@ -47,8 +54,15 @@ public class WebController
         return "redirect:/main";
     }
     @RequestMapping(value="/main")
-    public String mainframe(Model model)
-    {
+    public String mainframe(Model model){
+        List<RealTimeUsageDo> boards = realTimeUsageMongoRepository.findAll();
+        for(int i=0;i<boards.size();i++) {
+            Date date = new Date(boards.get(i).getTimestamp());
+            Format format = new SimpleDateFormat("yyyy-MM");
+            String timeStamp = format.format(date);
+            model.addAttribute("boards",timeStamp);
+        }
+
         URL url =null;
         URLConnection conn=null;
         List<weatherDo> weatherList = new ArrayList();
