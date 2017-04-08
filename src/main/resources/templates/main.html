@@ -9,7 +9,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>SNU Energy Saving System</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
@@ -35,7 +35,7 @@
 
 </head>
 
-<body>
+<body xmlns:th="http://www.w3.org/1999/xhtml">
 
 <div id="wrapper">
     <!-- header -->
@@ -47,11 +47,30 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Dashboard</h1>
+                <h1 class="page-header">SNU Energy Saving System</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="jumbotron" th:with="firstPer=${weather[0]}">
+                    <span>
+                        <span th:if="${firstPer.wfen} == 'Mostly Cloudy'">
+                            <i class="fa fa-cloud" style="font-size: 3em"></i>
+                            <span th:text="${firstPer.temp}" style="font-size: 3em">Jumbotron</span>
+                            <b style="font-size: 3em">℃</b>
+
+                        </span>
+                        </span>
+                    <p>
+                      현재 서울특별시 관악구 신림동 날씨는 <span th:text="${firstPer.wfen}"/> 이며 온도는 <span th:text="${firstPer.temp}"/> 입니다.
+                        냉방기 가동을 할 필요가 없습니다. 온풍기 가동을 할 필요가 없습니다.
+                    </p>
+                </div>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -78,6 +97,7 @@
                         </div>
                     </div>
                     <!-- /.panel-heading -->
+
                     <div class="panel-body">
                         <div id="morris-area-chart"></div>
                     </div>

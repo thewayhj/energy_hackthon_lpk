@@ -3,8 +3,11 @@ package com.lpk.energy.controller;
 import com.lpk.energy.ClassDo;
 import com.lpk.energy.TimeTableLoad;
 import com.lpk.energy.TimeTableMongoRepository;
+
 import com.lpk.energy.room.RoomDo;
 import com.lpk.energy.room.RoomMongoRepository;
+
+import com.lpk.energy.weather.weatherDo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +15,20 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
-import java.util.Calendar;
-import java.util.List;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.*;
 
 /**
  * Created by HeeJoongKim on 2017-04-07.
@@ -28,13 +42,55 @@ public class WebController
 
     @Autowired
     RoomMongoRepository roomMongoRepository;
-
     @RequestMapping(value="/")
     public String main(){
-        return "main";
+        return "redirect:/main";
     }
     @RequestMapping(value="/main")
-    public String mainframe(){
+    public String mainframe(Model model)
+    {
+        URL url =null;
+        URLConnection conn=null;
+        List<weatherDo> weatherList = new ArrayList();
+        try {
+            url =new URL("http://web.kma.go.kr/wid/queryDFSRSS.jsp?zone=1162069500");
+            conn=url.openConnection();
+
+            DocumentBuilderFactory f= DocumentBuilderFactory.newInstance();
+            DocumentBuilder b = f.newDocumentBuilder();
+            Document doc = b.parse(conn.getInputStream());
+
+            doc.getDocumentElement().normalize();
+
+            NodeList data = doc.getElementsByTagName("data");
+            for(int i=0;i<data.getLength();i++) {
+                weatherDo weatherdo = new weatherDo();
+                Element e = (Element) data.item(i);
+                if(e.getNodeType() != Node.ELEMENT_NODE)
+                    continue;
+
+                String hour = e.getElementsByTagName("hour").item(0).getTextContent(); //트리구조이기떄문에 첫번째데이터 item(0)을 해줘야함. 의 데이터를 꺼내준다.
+                String temp = e.getElementsByTagName("temp").item(0).getTextContent();
+                String wfEn = e.getElementsByTagName("wfEn").item(0).getTextContent();
+                weatherdo.setHour(Integer.parseInt(hour));
+                weatherdo.setTemp(Double.parseDouble(temp));
+                weatherdo.setWfen(wfEn);
+
+                weatherList.add(weatherdo);
+            }
+
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }catch (SAXException e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("weather",weatherList);
         return "main";
     }
 
@@ -69,6 +125,7 @@ public class WebController
         System.out.println("test"+boards.get(0).getName());
         System.out.println(today);
 
+
         for (int i=0;i<boards.size();) { //i<boards.size()
             int j = boards.get(i).getRoom().indexOf(today);
             if(j != -1) {
@@ -83,9 +140,16 @@ public class WebController
                 }
             }
             else {
+
                 boards.remove(i);
+
             }
+
+
+
+
         }
+
 
 //        for (RoomDo roomDo:rooms) {
 //
@@ -95,6 +159,7 @@ public class WebController
 
         model.addAttribute("boards", boards);
         model.addAttribute("rooms", rooms);
+
         return "tables";
     }
 
