@@ -102,6 +102,7 @@
                     </ul>
                 </div> <!-- .timeline -->
                 <div class="events">
+
                     <ul th:each="room : ${rooms}">
                         <li class="events-group ulwrap" >
                             <div class="top-info"><span th:text="${room.room}"></span></div>
@@ -135,6 +136,7 @@
                                 <li th:if="${time.test=='13'}" class="single-event" data-start="17:30" data-end="18:45" data-content="event-abs-circuit" data-event="event-2">
                                     <a href="#0">
                                         <em class="event-name" th:text="${time.name}">Abs Circuit</em>
+
                                     </a>
                                 </li>
                             </ul>

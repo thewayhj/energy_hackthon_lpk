@@ -6,13 +6,13 @@ package com.lpk.energy.weather;
 public class weatherDo {
     private int hour;
     private double temp;
-    private String wfEn;
+    private String wfen;
     public  weatherDo()
     {}
-    public weatherDo(int hour, double temp, String wfEn) {
+    public weatherDo(int hour, double temp, String wfen) {
         this.hour = hour;
         this.temp = temp;
-        this.wfEn = wfEn;
+        this.wfen = wfen;
     }
 
     public int getHour() {
@@ -31,11 +31,11 @@ public class weatherDo {
         this.temp = temp;
     }
 
-    public String getWfEn() {
-        return wfEn;
+    public String getWfen() {
+        return wfen;
     }
 
-    public void setWfEn(String wfEn) {
-        this.wfEn = wfEn;
+    public void setWfen(String wfen) {
+        this.wfen = wfen;
     }
 }
